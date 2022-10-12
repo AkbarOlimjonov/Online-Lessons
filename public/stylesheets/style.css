@@ -1,0 +1,17 @@
+nav{
+  background-color: black;
+}
+
+.card-title{
+  color: black !important;
+  font-weight: 700 !important;
+}
+
+.add-btn {
+  background-color: rgba(240, 56, 56, 0.883);
+}
+
+select{
+  margin: 0px !important;
+  width: 250px;
+}
