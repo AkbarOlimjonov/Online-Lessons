@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../model/category')
+const Product = require('../model/course')
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
@@ -49,12 +50,11 @@ router.get('/update/:id', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  const category = await Category.findById(req.params.id)
+  const products = await Product.find({ categoryID: req.params.id });
+  const category = await Category.findById(req.params.id);
   res.render('category', {
     title:  category.name,
-    name: category.name,
-    image: category.image,
-    id: category.id
+    products,
   })
 })
 

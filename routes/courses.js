@@ -11,6 +11,28 @@ router.get("/", async function (req, res, next) {
   });
 });
 
+
+router.get('/update/:id', async (req, res) => {
+  const course = await Course.findById(req.params.id)
+  res.render('updateCourse', {
+    title: course.name,
+    image: course.image,
+    id: course.id
+  })
+})
+
+router.post('/update/', async (req, res) => {
+  const { name, image, id } = req.body
+  await Course.findByIdAndUpdate(id, { name, image })
+  res.redirect('/courses')
+})
+
+router.get('/remove/:id', async (req, res) => {
+  const id = req.params.id
+  await Course.findByIdAndRemove(id)
+  res.redirect('/courses')
+})
+
 router.get("/course/create", async function (req, res, next) {
   const categories = await Category.find();
   console.log(categories);
