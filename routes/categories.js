@@ -1,4 +1,5 @@
 const express = require('express');
+const { find } = require('../model/category');
 const router = express.Router();
 const Category = require('../model/category')
 const Product = require('../model/course')
@@ -35,6 +36,11 @@ router.post('/create', async function (req, res, next) {
 
 router.get('/remove/:id', async (req, res) => {
   const id = req.params.id
+  const finds = await Product.find({categoryID:id})
+  finds.forEach(async (val) => {
+    await Product.findByIdAndDelete(val.id)
+  })
+  
   await Category.findByIdAndRemove(id)
   res.redirect('/categories')
 })
