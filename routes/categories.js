@@ -39,7 +39,7 @@ router.get('/remove/:id', async (req, res) => {
   const finds = await Product.find({categoryID:id})
   finds.forEach(async (val) => {
     await Product.findByIdAndDelete(val.id)
-  })
+  });
   
   await Category.findByIdAndRemove(id)
   res.redirect('/categories')
